@@ -1,0 +1,23 @@
+configuration {
+        width: 1000;
+        show-icons: true;
+        dpi: 0;
+        lines: 15;
+        columns: 1;
+        font: "Jetbrains Mono 11";
+        bw: 0;
+        padding: 100;
+        eh: 1;
+        auto-select: false;
+        line-margin: 18;
+        separator-style: "solid";
+        hide-scrollbar: true;
+        display-drun:               " Apps";
+        display-run:                " Run";
+        display-filebrowser:        " Files";
+        display-window:             " Windows";
+        drun-display-format:        "{icon} {name}";
+        window-format:              "{w} · {c} · {t}";
+}
+
+@theme "~/.cache/wal/colors-rofi-dark.rasi"

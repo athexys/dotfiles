@@ -1,0 +1,36 @@
+#!/bin/sh
+
+main() {
+  if ! pgrep -x spotify >/dev/null; then
+    exit
+  fi
+
+  domain="org.mpris.MediaPlayer2"
+  path="/org/mpris/MediaPlayer2"
+
+  status=$(dbus-send --print-reply --dest=${domain}.spotify \
+    $path org.freedesktop.DBus.Properties.Get \
+    string:${domain}.Player string:PlaybackStatus 2>/dev/null | grep -o '"[^"]*"$' | tr -d '"')
+
+  if [ "$status" != "Playing" ]; then
+    exit
+  fi
+
+  meta=$(dbus-send --print-reply --dest=${domain}.spotify \
+    $path org.freedesktop.DBus.Properties.Get \
+    string:${domain}.Player string:Metadata 2>/dev/null) || exit
+
+  artist=$(echo "$meta" | sed -nr '/xesam:artist"/,+2s/^ +string "(.*)"$/\1/p' | tail -1)
+  album=$(echo "$meta" | sed -nr '/xesam:album"/,+2s/^ +variant +string "(.*)"$/\1/p' | tail -1)
+  title=$(echo "$meta" | sed -nr '/xesam:title"/,+2s/^ +variant +string "(.*)"$/\1/p' | tail -1)
+
+  [ -z "$artist" ] || [ -z "$title" ] && exit
+
+  artist=$(printf '%s\n' "$artist" | sed 's/&/\\&/g; s#/#\\/#g')
+  album=$(printf '%s\n' "$album" | sed 's/&/\\&/g; s#/#\\/#g')
+  title=$(printf '%s\n' "$title" | sed 's/&/\\&/g; s#/#\\/#g')
+
+  echo " ${*:-%artist% - %title%}" | sed "s/%artist%/$artist/g; s/%title%/$title/g; s/%album%/$album/g"
+}
+
+main "$@"

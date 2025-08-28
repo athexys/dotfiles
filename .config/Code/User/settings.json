@@ -1,0 +1,35 @@
+{
+    "workbench.colorTheme": "Wal",
+    "glassit.alpha": 220,
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 20,
+    "editor.fontFamily": "Jetbrains Mono",
+    "editor.fontLigatures": true,
+    "editor.mouseWheelZoom": true,
+    "editor.cursorStyle": "block",
+    "animations.CursorAnimation": true,
+    "animations.Install-Method": "Custom UI Style",
+    "animations.Enabled": true,
+    "custom-ui-style.external.imports": [
+        "file:///home/codaxy/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
+    ],
+    "animations.CursorAnimationOptions": {
+        "TrailLength": 10
+    },
+    "python.analysis.typeCheckingMode": "strict",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+    },
+    "isort.args":["--profile", "black"],
+    "black-formatter.args": [
+        "--line-length",
+        "79"
+    ],
+    "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark",
+    "editor.minimap.enabled": false,
+    "editor.smoothScrolling": true
+}

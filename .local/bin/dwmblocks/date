@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dte="$(date +"%d/%m  %H:%M")"
+echo -e "󰸗 $dte"

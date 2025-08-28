@@ -1,0 +1,17 @@
+#!/bin/sh
+
+status=$(pulsemixer --get-mute)
+if [ -n "$status" ] && [ "$status" == "1" ]; then
+    echo -e "󰖁"
+else
+    vol=$(pulsemixer --get-volume | awk '{print ($1+$2)/2}')
+    if [ $(echo "$vol >= 1 && $vol <= 49" | bc) -eq 1 ]; then
+        echo -e "󰖀 $vol%"
+    else
+        if [ $(echo "$vol == 0" | bc) -eq 1 ]; then
+            echo -e "󰝟"
+        else
+            echo -e "󰕾 $vol%"
+        fi
+    fi
+fi

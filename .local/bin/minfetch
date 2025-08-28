@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PURPLE=$(echo -en '\033[00;35m')
+WHITE=$(echo -en '\033[01;37m')
+
+OS=`cat /etc/os-release | grep PRETTY_NAME | sed 's/\"//g' | sed 's/.*=//g'`
+KERNEL=`uname -r`
+RAM=$(echo "$((`cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024))")
+MEM=`free -h | awk '/^Mem/ { print $3"/"$2 }' | sed 's/i//g'`
+UPTIME=`echo $(uptime | awk '{print $3}' | sed 's/,//g' | sed 's/\:/h /g')m`
+
+echo ${PURPLE} ${RESTORE} ${WHITE}$OS${RESTORE}
+echo ${PURPLE} ${RESTORE} ${WHITE}$UPTIME${RESTORE}
+echo ${PURPLE} ${RESTORE} ${WHITE}$KERNEL${RESTORE}
+echo ${PURPLE} ${RESTORE} ${WHITE}$MEM${RESTORE}
+echo 

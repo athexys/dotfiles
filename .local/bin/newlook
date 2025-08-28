@@ -1,0 +1,11 @@
+#!/bin/sh
+
+wall=$(find ~/walls/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+
+xwallpaper --zoom $wall
+wal -c
+wal -i $wall
+
+oomox-cli /opt/oomox/scripted_colors/xresources/xresources-reverse
+pywalfox update
+xdotool key super+F5
